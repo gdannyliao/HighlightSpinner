@@ -1,0 +1,9 @@
+<resources>
+	<string name="app_name">Test</string>
+	<string-array name="spinners">
+		<item>A 产品部</item>
+		<item>B 客户部</item>
+
+
+	</string-array>
+</resources>

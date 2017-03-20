@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<resources xmlns:tools="http://schemas.android.com/tools">
+	<declare-styleable name="HighlightSpinner"
+		tools:ignore="ResourceName">
+		<attr name="highlight_spinner_arrow_tint"
+			format="color"/>
+		<attr name="highlight_spinner_hide_arrow"
+			format="boolean"/>
+		<attr name="highlight_spinner_background_color"
+			format="color"/>
+		<attr name="highlight_spinner_text_color"
+			format="color"/>
+		<attr name="highlight_spinner_dropdown_max_height"
+			format="dimension"/>
+		<attr name="highlight_spinner_dropdown_height"
+			format="dimension">
+			<enum name="fill_parent"
+				value="-1"/>
+			<enum name="match_parent"
+				value="-1"/>
+			<enum name="wrap_content"
+				value="-2"/>
+		</attr>
+	</declare-styleable>
+</resources>

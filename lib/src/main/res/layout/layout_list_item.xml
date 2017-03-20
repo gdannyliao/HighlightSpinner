@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.v7.widget.AppCompatTextView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/tv_tinted_spinner"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_gravity="start|center_vertical"
+	android:text="示例"
+	android:ellipsize="marquee"
+	android:minHeight="@dimen/highlight_spinner__item_height"
+	android:paddingBottom="@dimen/highlight_spinner__popup_padding_top"
+	android:paddingLeft="@dimen/highlight_spinner__popup_padding_left"
+	android:paddingRight="@dimen/highlight_spinner__popup_padding_left"
+	android:paddingStart="@dimen/highlight_spinner__popup_padding_left"
+	android:paddingTop="@dimen/highlight_spinner__popup_padding_top"
+	android:maxLines="1"
+	android:gravity="center"
+	/>
+
