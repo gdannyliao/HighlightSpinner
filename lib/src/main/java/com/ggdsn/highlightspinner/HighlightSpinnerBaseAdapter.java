@@ -57,7 +57,7 @@ public abstract class HighlightSpinnerBaseAdapter<T> extends BaseAdapter {
 			textView = ((ViewHolder) convertView.getTag()).textView;
 		}
 		T item = getItem(position);
-		textView.setText(item.toString());
+		textView.setText(toDisplayString(item));
 
 		if (position == selectedIndex) {
 			textView.setEnabled(true);
@@ -69,6 +69,8 @@ public abstract class HighlightSpinnerBaseAdapter<T> extends BaseAdapter {
 		}
 		return convertView;
 	}
+
+	public abstract String toDisplayString(T item);
 
 	public int getSelectedIndex() {
 		return selectedIndex;

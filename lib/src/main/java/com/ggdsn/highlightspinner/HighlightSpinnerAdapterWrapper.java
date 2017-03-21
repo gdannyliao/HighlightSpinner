@@ -18,6 +18,10 @@ class HighlightSpinnerAdapterWrapper extends HighlightSpinnerBaseAdapter {
 		this.adapter = adapter;
 	}
 
+	@Override public String toDisplayString(Object item) {
+		return item.toString();
+	}
+
 	@Override public Object getItem(int position) {
 		return adapter.getItem(position);
 	}

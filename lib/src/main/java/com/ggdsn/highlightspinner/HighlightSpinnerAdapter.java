@@ -16,6 +16,10 @@ public class HighlightSpinnerAdapter<T> extends HighlightSpinnerBaseAdapter<T> {
 		this.items = items;
 	}
 
+	@Override public String toDisplayString(T item) {
+		return item.toString();
+	}
+
 	@Override public T getItem(int position) {
 		return items.get(position);
 	}

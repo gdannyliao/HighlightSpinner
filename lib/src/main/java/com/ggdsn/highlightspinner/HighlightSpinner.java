@@ -126,7 +126,8 @@ public class HighlightSpinner extends AppCompatTextView {
 				nothingSelected = false;
 				Object item = adapter.getItem(position);
 				adapter.notifyItemSelected(position);
-				setText(item.toString());
+				@SuppressWarnings("unchecked") String toDisplayString = adapter.toDisplayString(item);
+				setText(toDisplayString);
 				collapse();
 				if (onItemSelectedListener != null) {
 					//noinspection unchecked
@@ -347,18 +348,18 @@ public class HighlightSpinner extends AppCompatTextView {
 		setAdapterInternal(this.adapter);
 	}
 
-	public <T> void setAdapter(HighlightSpinnerAdapter<T> adapter) {
+	public <T> void setAdapter(HighlightSpinnerBaseAdapter<T> adapter) {
 		// FIXME: 20/03/2017 列表一片空白
 		this.adapter = adapter;
 		setAdapterInternal(adapter);
 	}
 
-	private void setAdapterInternal(@NonNull HighlightSpinnerBaseAdapter adapter) {
+	private <T> void setAdapterInternal(@NonNull HighlightSpinnerBaseAdapter<T> adapter) {
 		listView.setAdapter(adapter);
 		if (selectedIndex >= numberOfItems) {
 			selectedIndex = 0;
 		}
-		setText(adapter.getItem(selectedIndex).toString());
+		setText(adapter.toDisplayString(adapter.getItem(selectedIndex)));
 	}
 
 	/**
