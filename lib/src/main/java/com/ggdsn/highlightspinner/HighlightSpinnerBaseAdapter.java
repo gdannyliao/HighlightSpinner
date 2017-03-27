@@ -70,6 +70,9 @@ public abstract class HighlightSpinnerBaseAdapter<T> extends BaseAdapter {
 		return convertView;
 	}
 
+	/**
+	 * 将item转化成要显示的类型，默认是直接item.toString()。如果子类想用其他信息作为显示标题，则应该覆盖该方法
+	 */
 	public abstract String toDisplayString(T item);
 
 	public int getSelectedIndex() {

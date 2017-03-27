@@ -23,5 +23,16 @@
 			<enum name="wrap_content"
 				value="-2"/>
 		</attr>
+		<attr name="highlight_spinner_dropdown_width"
+			format="dimension">
+			<enum name="fill_parent"
+				value="-1"/>
+			<enum name="match_parent"
+				value="-1"/>
+			<enum name="wrap_content"
+				value="-2"/>
+			<enum name="match_spinner"
+				value="-3"/>
+		</attr>
 	</declare-styleable>
 </resources>

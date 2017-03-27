@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -18,6 +19,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -35,7 +37,7 @@ import java.util.List;
  * Created by LiaoXingyu on 20/03/2017.
  */
 public class HighlightSpinner extends AppCompatTextView {
-
+	public static final int MATCH_SPINNER = -3;
 	private OnNothingSelectedListener onNothingSelectedListener;
 	private OnItemSelectedListener onItemSelectedListener;
 	private HighlightSpinnerBaseAdapter adapter;
@@ -52,6 +54,7 @@ public class HighlightSpinner extends AppCompatTextView {
 	private int arrowColorDisabled;
 	private int textColor;
 	private int numberOfItems;
+	private int popupWindowWidth;
 
 	public HighlightSpinner(Context context) {
 		super(context);
@@ -82,6 +85,8 @@ public class HighlightSpinner extends AppCompatTextView {
 				ta.getDimensionPixelSize(R.styleable.HighlightSpinner_highlight_spinner_dropdown_max_height, 0);
 			popupWindowHeight = ta.getLayoutDimension(R.styleable.HighlightSpinner_highlight_spinner_dropdown_height,
 				WindowManager.LayoutParams.WRAP_CONTENT);
+			popupWindowWidth =
+				ta.getLayoutDimension(R.styleable.HighlightSpinner_highlight_spinner_dropdown_width, MATCH_SPINNER);
 			arrowColorDisabled = Utils.lighter(arrowColor, 0.8f);
 		} finally {
 			ta.recycle();
@@ -170,9 +175,12 @@ public class HighlightSpinner extends AppCompatTextView {
 	}
 
 	@Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		popupWindow.setWidth(MeasureSpec.getSize(widthMeasureSpec));
-		popupWindow.setHeight(calculatePopupWindowHeight());
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+		if (popupWindowWidth == MATCH_SPINNER) {
+			popupWindowWidth = MeasureSpec.getSize(widthMeasureSpec);
+		}
+		popupWindow.setWidth(calculatePopupWindowWidth());
+		popupWindow.setHeight(calculatePopupWindowHeight());
 	}
 
 	@Override public boolean onTouchEvent(@NonNull MotionEvent event) {
@@ -430,6 +438,26 @@ public class HighlightSpinner extends AppCompatTextView {
 	public void setDropdownHeight(int height) {
 		popupWindowHeight = height;
 		popupWindow.setHeight(calculatePopupWindowHeight());
+	}
+
+	public void setDropdownWidth(int width) {
+		popupWindowWidth = width;
+		popupWindow.setWidth(calculatePopupWindowWidth());
+	}
+
+	private int calculatePopupWindowWidth() {
+		if (adapter == null) {
+			return popupWindowWidth != 0 ? popupWindowWidth : WindowManager.LayoutParams.WRAP_CONTENT;
+		}
+		if (popupWindowWidth == WindowManager.LayoutParams.MATCH_PARENT) {
+			WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+			Display display = wm.getDefaultDisplay();
+			Point size = new Point();
+			display.getSize(size);
+			return size.x;
+		} else {
+			return popupWindowWidth;
+		}
 	}
 
 	private int calculatePopupWindowHeight() {

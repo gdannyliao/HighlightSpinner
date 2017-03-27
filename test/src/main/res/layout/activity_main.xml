@@ -16,13 +16,14 @@
 		app:highlight_spinner_text_color="@color/colorAccent"
 		/>
 	<com.ggdsn.highlightspinner.HighlightSpinner
-		android:layout_width="match_parent"
+		android:layout_width="300dp"
 		android:layout_height="wrap_content"
 		android:id="@+id/spinner1"
 		/>
 	<com.ggdsn.highlightspinner.HighlightSpinner
-		android:layout_width="match_parent"
+		android:layout_width="200dp"
 		android:layout_height="wrap_content"
 		android:id="@+id/spinner2"
+		app:highlight_spinner_dropdown_width="match_parent"
 		/>
 </LinearLayout>

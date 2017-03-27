@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 		ArrayAdapter<CharSequence> adapter =
 			ArrayAdapter.createFromResource(this, R.array.spinners, android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapter);
+		spinner.setDropdownWidth(500);
 
 		HighlightSpinner spinner1 = (HighlightSpinner) findViewById(R.id.spinner1);
 		spinner1.setItems("sdf", "dsf", "ww");
