@@ -35,4 +35,13 @@
 				value="-3"/>
 		</attr>
 	</declare-styleable>
+
+	<color name="gray_f9">#f9f9f9</color>
+	<color name="highlightSpinnerGold">#D3B263</color>
+
+	<dimen name="highlight_spinner__padding_left">24dp</dimen>
+	<dimen name="highlight_spinner__padding_top">12dp</dimen>
+	<dimen name="highlight_spinner__item_height">48dp</dimen>
+	<dimen name="highlight_spinner__popup_padding_left">24dp</dimen>
+	<dimen name="highlight_spinner__popup_padding_top">12dp</dimen>
 </resources>

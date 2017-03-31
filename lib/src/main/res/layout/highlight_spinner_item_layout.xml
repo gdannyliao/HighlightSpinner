@@ -3,7 +3,7 @@
 
 <android.support.v7.widget.AppCompatTextView
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/tv_tinted_spinner"
+	android:id="@+id/textViewHighlightSpinnerTinedItem"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:layout_gravity="start|center_vertical"

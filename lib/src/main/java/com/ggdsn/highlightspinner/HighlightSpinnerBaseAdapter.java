@@ -32,7 +32,7 @@ public abstract class HighlightSpinnerBaseAdapter<T> extends BaseAdapter {
 		this.context = context;
 		Resources resources = context.getResources();
 		colorGray = resources.getColor(R.color.gray_f9);
-		colorGold = resources.getColor(R.color.gold);
+		colorGold = resources.getColor(R.color.highlightSpinnerGold);
 		colorWhite = resources.getColor(android.R.color.white);
 		textColorStateList =
 			new ColorStateList(new int[][] { new int[] { android.R.attr.state_enabled }, new int[] {} },
@@ -43,8 +43,8 @@ public abstract class HighlightSpinnerBaseAdapter<T> extends BaseAdapter {
 		final AppCompatTextView textView;
 		if (convertView == null) {
 			LayoutInflater inflater = LayoutInflater.from(context);
-			convertView = inflater.inflate(R.layout.layout_list_item, parent, false);
-			textView = (AppCompatTextView) convertView.findViewById(R.id.tv_tinted_spinner);
+			convertView = inflater.inflate(R.layout.highlight_spinner_item_layout, parent, false);
+			textView = (AppCompatTextView) convertView.findViewById(R.id.textViewHighlightSpinnerTinedItem);
 			textView.setTextColor(textColorStateList);
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
 				Configuration config = context.getResources().getConfiguration();
