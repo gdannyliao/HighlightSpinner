@@ -55,6 +55,7 @@ public class HighlightSpinner extends AppCompatTextView {
 	private int textColor;
 	private int numberOfItems;
 	private int popupWindowWidth;
+	private OnDisplayChangeListener onDisplayChangeListener;
 
 	public HighlightSpinner(Context context) {
 		super(context);
@@ -169,6 +170,9 @@ public class HighlightSpinner extends AppCompatTextView {
 				}
 				if (!hideArrow) {
 					animateArrow(false);
+				}
+				if (onDisplayChangeListener != null) {
+					onDisplayChangeListener.onDisplayChanged(false);
 				}
 			}
 		});
@@ -388,6 +392,9 @@ public class HighlightSpinner extends AppCompatTextView {
 			int y = getHeight() + location[1];
 			popupWindow.showAtLocation(this, Gravity.TOP | Gravity.START, x, y);
 		}
+		if (onDisplayChangeListener != null) {
+			onDisplayChangeListener.onDisplayChanged(true);
+		}
 	}
 
 	/**
@@ -482,6 +489,17 @@ public class HighlightSpinner extends AppCompatTextView {
 	 */
 	public PopupWindow getPopupWindow() {
 		return popupWindow;
+	}
+
+	public void setOnDisplayChangeListener(OnDisplayChangeListener listener) {
+		onDisplayChangeListener = listener;
+	}
+
+	/**
+	 * a callback to be invoked when PopupWindow displayed or dismissed.
+	 */
+	public interface OnDisplayChangeListener {
+		void onDisplayChanged(boolean displayed);
 	}
 
 	/**
