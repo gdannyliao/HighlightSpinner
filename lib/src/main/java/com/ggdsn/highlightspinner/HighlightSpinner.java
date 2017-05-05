@@ -54,7 +54,9 @@ public class HighlightSpinner extends AppCompatTextView {
 	private int arrowColorDisabled;
 	private int textColor;
 	private int numberOfItems;
-	private int popupWindowWidth;
+	private int popupWindowWidthType;
+	private int popupWindowWidthPx;
+
 	private OnDisplayChangeListener onDisplayChangeListener;
 
 	public HighlightSpinner(Context context) {
@@ -86,7 +88,7 @@ public class HighlightSpinner extends AppCompatTextView {
 				ta.getDimensionPixelSize(R.styleable.HighlightSpinner_highlight_spinner_dropdown_max_height, 0);
 			popupWindowHeight = ta.getLayoutDimension(R.styleable.HighlightSpinner_highlight_spinner_dropdown_height,
 				WindowManager.LayoutParams.WRAP_CONTENT);
-			popupWindowWidth =
+			popupWindowWidthType =
 				ta.getLayoutDimension(R.styleable.HighlightSpinner_highlight_spinner_dropdown_width, MATCH_SPINNER);
 			arrowColorDisabled = Utils.lighter(arrowColor, 0.8f);
 		} finally {
@@ -180,8 +182,8 @@ public class HighlightSpinner extends AppCompatTextView {
 
 	@Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-		if (popupWindowWidth == MATCH_SPINNER) {
-			popupWindowWidth = MeasureSpec.getSize(widthMeasureSpec);
+		if (popupWindowWidthType == MATCH_SPINNER) {
+			popupWindowWidthPx = getMeasuredWidth();
 		}
 		popupWindow.setWidth(calculatePopupWindowWidth());
 		popupWindow.setHeight(calculatePopupWindowHeight());
@@ -448,22 +450,25 @@ public class HighlightSpinner extends AppCompatTextView {
 	}
 
 	public void setDropdownWidth(int width) {
-		popupWindowWidth = width;
+		popupWindowWidthType = width;
 		popupWindow.setWidth(calculatePopupWindowWidth());
 	}
 
 	private int calculatePopupWindowWidth() {
 		if (adapter == null) {
-			return popupWindowWidth != 0 ? popupWindowWidth : WindowManager.LayoutParams.WRAP_CONTENT;
+			return popupWindowWidthPx != 0 ? popupWindowWidthPx : WindowManager.LayoutParams.WRAP_CONTENT;
 		}
-		if (popupWindowWidth == WindowManager.LayoutParams.MATCH_PARENT) {
+		if (popupWindowWidthType == WindowManager.LayoutParams.MATCH_PARENT) {
 			WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
 			Display display = wm.getDefaultDisplay();
 			Point size = new Point();
 			display.getSize(size);
 			return size.x;
+		} else if (popupWindowWidthType == WindowManager.LayoutParams.WRAP_CONTENT) {
+			// FIXME: 05/05/2017 warp content会根据spinner的宽度设置，而不是popup内容的宽度
+			return WindowManager.LayoutParams.WRAP_CONTENT;
 		} else {
-			return popupWindowWidth;
+			return popupWindowWidthPx;
 		}
 	}
 

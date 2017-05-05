@@ -27,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
 
 		HighlightSpinner spinner2 = (HighlightSpinner) findViewById(R.id.spinner2);
 		spinner2.setAdapter(new RegionAdapter(this, RegionAdapter.getList()));
+
+		HighlightSpinner spinnerWrapContent = (HighlightSpinner) findViewById(R.id.spinnerWrapContent);
+		spinnerWrapContent.setAdapter(new RegionAdapter(this, RegionAdapter.getList()));
 	}
 
 	private static class RegionAdapter extends HighlightSpinnerBaseAdapter<Region> {
