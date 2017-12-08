@@ -291,7 +291,7 @@ public class HighlightSpinner extends AppCompatTextView {
 			if (position >= 0 && position <= adapter.getCount()) {
 				adapter.notifyItemSelected(position);
 				selectedIndex = position;
-				setText(adapter.getItem(position).toString());
+				setText(adapter.toDisplayString(adapter.getItem(position)));
 			} else {
 				throw new IllegalArgumentException("Position must be lower than adapter count!");
 			}
